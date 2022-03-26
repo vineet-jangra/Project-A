@@ -1,12 +1,18 @@
-const mergeSortAlgorithm = (array) => {
+const mergeSortAlgorithm = async(array) => {
     const animationArray = [];
     const helperArray = array.slice();   // CREATE A NEW ARRAY, WE WILL DO MERGE SORT ON ONE AND KEEP TRACK OF ANIMATIONS ON THE OTHER      
     mergeSortHelper(array, 0, array.length - 1, helperArray, animationArray);
     doAnimation(animationArray);
+    await new Promise((resolve) =>
+    setTimeout(() => {
+        
+        resolve();
+      }, animationArray.length * 20)
+    );
     return array;
 }
 const mergeSortHelper = (originalArray, low, high, helperArray, animationArray) => {
-    if(low === high) return;
+    if(low >= high) return;
     const mid = Math.floor((high + low) / 2);
     mergeSortHelper(helperArray, low, mid, originalArray, animationArray); //  SIMPLE MERGE SORT 
     mergeSortHelper(helperArray, mid + 1, high, originalArray, animationArray);
@@ -40,6 +46,7 @@ const merge = (originalArray, low, mid, high, helperArray, animationArray) => {
         animationArray.push([k, helperArray[j]]);
         originalArray[k++] = helperArray[j++];
     }
+    
   }
     // HERE WE WILL GET OUR ANIMATIONS ARRAY FILLED WITH TOW VALUES
 const doAnimation = (animationsArray) => {

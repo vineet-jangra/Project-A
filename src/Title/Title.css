@@ -1,15 +1,11 @@
 .title-div {
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    position: fixed;
+    bottom: 0;
     color: white;
-    font-size: 2rem;
+    font-size: 3rem;
     font-family: Arial, Helvetica, sans-serif;
     background-color: #34496e;
-    padding: 20px;
-    margin-bottom: 30px;
-}
-.information-btn {
-    position: absolute;
-    color: white;
-    font-size: 2rem;
-    top: 10px;
-    right: 10%;
 }

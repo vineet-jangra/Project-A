@@ -1,10 +1,14 @@
-const arr = [];
+let arr = [];
+const animation = [];
 const divSelctor = document.getElementsByClassName('array-bar-div');
 
 const heapSortAlgorithm = async (array, delay) => {
+  console.log('hi');
+  arr = [];
     for(let i = 0; i < array.length; i++) {
         arr.push(array[i]);
     }    
+    
     await heapSort(arr.length);
     return arr;
 }
@@ -21,7 +25,7 @@ const heapSort = async (n) => {
           setTimeout(() => {
             divSelctor[i].style.height = b;
             divSelctor[0].style.height = a;
-            divSelctor[i].style.backgroundColor = '#7CFC00';  //
+            divSelctor[i].style.backgroundColor = '#32CD32';  //
             resolve();
           }, 30)
         );

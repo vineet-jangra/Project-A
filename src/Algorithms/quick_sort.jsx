@@ -1,96 +1,101 @@
-const arr = [];
-const divSelctor = document.getElementsByClassName('array-bar-div');
+let animationsArray = [];
+const divSelector = document.getElementsByClassName('array-bar-div');
 
-const quickSortAlgorithm = async (array, low, high) => {
-  if(low < high) {
-    const pivotPoint = await partitionArray(array, low, high);
-    console.log(pivotPoint, 'new');
-    await Promise.all([
-      quickSortAlgorithm(array, low, pivotPoint - 1),
-      quickSortAlgorithm(array, pivotPoint + 1, high)
-    ]);
-  }
-}
-
-const partitionArray = async (array, low, high) => {
-    const pivot = array[high];
-    let i = low - 1;
-    await new Promise(resolve =>
-      setTimeout(() => {
-        divSelctor[high].style.backgroundColor = 'green';
-        divSelctor[i + 1].style.backgroundColor = 'red';
-        resolve();
-      }, 30)
-    );
-    for(let j = low; j < high; j++) {
-      // await new Promise(resolve =>
-      //   setTimeout(() => {
-      //     divSelctor[j].style.backgroundColor = 'yellow';
-      //     resolve();
-      //   }, 20)
-      // );
-        if(array[j] <= pivot) {
-          await new Promise(resolve =>
-            setTimeout(() => {
-            document.getElementsByClassName('array-bar-div')[i + 1].style.backgroundColor = 'turquoise';
-              resolve();
-            }, 20)
-          );
-            i++;
-            await new Promise(resolve =>
-              setTimeout(() => {
-              document.getElementsByClassName('array-bar-div')[i].style.backgroundColor = 'red';
-                resolve();
-              }, 20)
-            );
-            const a = divSelctor[i].style.height;
-            const b = divSelctor[j].style.height;
-            await new Promise(resolve =>
-                setTimeout(() => {
-                    divSelctor[i].style.height = b;
-                    divSelctor[j].style.height = a;
-                  resolve();
-                }, 20)
-              );
-            const temp = array[i];
-            array[i] = array[j];
-            array[j] = temp;
-            // await new Promise(resolve =>
-            //   setTimeout(() => {
-            //   document.getElementsByClassName('array-bar-div')[i].style.backgroundColor = 'turquoise';
-            //   document.getElementsByClassName('array-bar-div')[i + 1].style.backgroundColor = 'turquoise';
-            //     resolve();
-            //   }, 20)
-            // );
-        }
-        // await new Promise(resolve =>
-        //   setTimeout(() => {
-        //     document.getElementsByClassName('array-bar-div')[j].style.backgroundColor = 'tuquoise';
-        //     resolve();
-        //   }, 20)
-        // );
+let array = [];
+const quickSortMedian = async (arr, low, high) => {
+    array = [];
+    animationsArray = [];
+    for(let i = 0; i < arr.length; i++) {
+        array.push(arr[i]);
     }
-    const a = divSelctor[i + 1].style.height;
-    const b = divSelctor[high].style.height;
-    await new Promise(resolve =>
-        setTimeout(() => {
-            divSelctor[i + 1].style.height = b;
-            divSelctor[high].style.height = a;
-          resolve();
-        }, 20)
-      );
-    const temp = array[high];
-    array[high] = array[i + 1];
-    array[i + 1] = temp;
-    await new Promise(resolve =>
-      setTimeout(() => {
-        for(let i = 0; i < array.length; i++) {
-          divSelctor[i].style.backgroundColor = 'turquoise';
-        }
+    await quickSort(low, high);
+    doAnimation();
+    await new Promise((resolve) =>
+    setTimeout(() => {
         resolve();
-      }, 10)
+      }, animationsArray.length * 10)
     );
-    return i + 1;
+    return array;
+}
+const doAnimation = () => {
+  for(let i = 0; i < animationsArray.length; i++) {
+    setTimeout(() => {
+      if(animationsArray[i].length === 2) {
+        divSelector[animationsArray[i][0]].style.backgroundColor = (animationsArray[i][1]) ? "red" : "turquoise";
+      } else {
+        const a = divSelector[animationsArray[i][0]].style.height;
+        const b = divSelector[animationsArray[i][1]].style.height; 
+        divSelector[animationsArray[i][0]].style.height = b;
+        divSelector[animationsArray[i][1]].style.height = a;
+      }
+    }, 10 * i);
+  }
+} 
+
+const quickSort = async (low, high) => {
+  if(low >= high) {
+    animationsArray.push([low, true]);
+    animationsArray.push([low, false]);
+    return;
+  }
+    let p = Math.floor((low + high + 1) / 2);
+    let pivotValue = array[p];
+    let i = low, j = high;
+    animationsArray.push([p, true]);
+    animationsArray.push([p, false]);
+
+    animationsArray.push([i, true]);
+    animationsArray.push([i, false]);
+
+    animationsArray.push([j, true]);
+    animationsArray.push([j, false]);
+
+    while(i <= j) {
+        while(array[i] < pivotValue) {
+            i++;
+            animationsArray.push([i, true]);
+            animationsArray.push([i, false]);
+
+        }
+        while(array[j] > pivotValue) {
+            j--;
+            animationsArray.push([j, true]);
+            animationsArray.push([j, false]);
+
+        }
+        
+        if(i <= j) {
+            animationsArray.push([i, j, true]);
+            let t = array[i];
+            array[i] = array[j];
+            array[j] = t;
+            // SWAP BARS
+            animationsArray.push([p, true]);
+            animationsArray.push([p, false]);
+            if(p == i) {
+                p = j;
+                animationsArray.push([j, true]);
+                animationsArray.push([j, false]);
+            }
+            else if(p == j) {
+                p = i;
+                animationsArray.push([i, true]);
+                animationsArray.push([i, false]);    
+            }
+            i++;
+            j--;
+            animationsArray.push([i, true]);
+            animationsArray.push([i, false]);
+            animationsArray.push([j, true]);
+            animationsArray.push([j, false]);
+        }
+    }
+    if(low < j) {
+        await quickSort(low, j);
+    }
+    if(i < high) {
+        await quickSort(i, high);
+    }
 }
 
-export default quickSortAlgorithm;
+export default quickSortMedian;

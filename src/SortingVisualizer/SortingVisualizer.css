@@ -1,21 +1,17 @@
 .array-container {
-    position: absolute;
     left: 10px;
     right: 10px;
-    bottom: 120px;
+    margin-top: 300px;
 }
 .array-bar-div {
     width: 10px;
+    margin-right: 1px;
     background-color: turquoise;
     display: inline-block;
-    margin: 0 px;
 }
 .button-container {
-    position: fixed;
     display: block;
-    bottom: 0;
     background-color: #34496e;
-    width: 100%;
 }
 .algo-button {
     color: white;
@@ -27,7 +23,6 @@
     cursor: pointer;
     padding: 10px ;
 }
-
 .algo-button:hover {
     color : silver;
 }

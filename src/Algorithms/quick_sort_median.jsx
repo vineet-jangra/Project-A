@@ -21,7 +21,7 @@ const quickSort = async (low, high) => {
           divSelector[i].style.backgroundColor = 'red';
           divSelector[j].style.backgroundColor = 'red';
           resolve();
-        }, 100)
+        }, 10)
       );
     // COLOR I J
     while(i <= j) {
@@ -31,7 +31,7 @@ const quickSort = async (low, high) => {
             document.getElementsByClassName('array-bar-div')[j].style.backgroundColor = 'turquoise';
             document.getElementsByClassName('array-bar-div')[p].style.backgroundColor = 'turquoise';
               resolve();
-            }, 100)
+            }, 10)
           );
         while(array[i] < pivotValue) {
             i++;
@@ -70,7 +70,7 @@ const quickSort = async (low, high) => {
                 document.getElementsByClassName('array-bar-div')[j].style.backgroundColor = 'red';
                 document.getElementsByClassName('array-bar-div')[p].style.backgroundColor = 'green';
                   resolve();
-                }, 100)
+                }, 10)
               );
         }
         // await new Promise((resolve) =>

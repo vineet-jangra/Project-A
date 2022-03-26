@@ -3,12 +3,9 @@ import './Title.css';
 
 const title = (props) => {
     return (
-        <React.Fragment>
-            <div className="title-div">
-                Sorting Visualizer
-            </div>
-            {/* <div className='information-btn'>(i)</div> */}
-        </React.Fragment>
+        <div className="title-div">
+            Sorting Visualizer
+        </div>
     )
 };
 export default title;

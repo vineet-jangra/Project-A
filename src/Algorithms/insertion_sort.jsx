@@ -1,6 +1,7 @@
+const divElement = document.getElementsByClassName('array-bar-div');
+
 const insertionSortAlgorithm = async (array, delay) => {
   delay = 30;
-  const divElement = document.getElementsByClassName('array-bar-div');
   const length = array.length;
     for(let i = 1; i < length; i++) {
         let j = i - 1;
@@ -15,7 +16,7 @@ const insertionSortAlgorithm = async (array, delay) => {
           
           await new Promise(resolve =>
             setTimeout(() => {
-                  divElement[j].style.backgroundColor = "#7CFC00";
+                  divElement[j].style.backgroundColor = '#32CD32';
                   resolve();
                 }, delay)
               );
@@ -29,7 +30,7 @@ const insertionSortAlgorithm = async (array, delay) => {
                     divElement[j].style.height = b;
                     divElement[j + 1].style.height = a;
                     divElement[j].style.backgroundColor = 'red';
-                    divElement[j + 1].style.backgroundColor = "#7CFC00";
+                    divElement[j + 1].style.backgroundColor = '#32CD32';
                   resolve();
                 }, delay)
               );
@@ -37,7 +38,7 @@ const insertionSortAlgorithm = async (array, delay) => {
         }
         await new Promise(resolve =>
           setTimeout(() => {
-              divElement[j + 1].style.backgroundColor = "#7CFC00";
+              divElement[j + 1].style.backgroundColor = '#32CD32';
               resolve();
             }, delay)
           );
